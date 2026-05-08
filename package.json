@@ -1,0 +1,24 @@
+{
+  "name": "circuit-sage",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A DeFi risk copilot that turns market chaos into safe, auditable incident decisions.",
+  "scripts": {
+    "test": "node tests/engine.test.js",
+    "eval": "node observability/run-evals.js",
+    "start": "node server.js",
+    "mcp": "node mcp/circuitsage-mcp.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "hackathon",
+    "agents",
+    "defi",
+    "resilience",
+    "risk",
+    "rapid-agent",
+    "gemini",
+    "mcp"
+  ],
+  "license": "MIT"
+}

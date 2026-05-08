@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "circuitsage-risk": {
+      "command": "node",
+      "args": ["mcp/circuitsage-mcp.js"]
+    },
+    "arize-phoenix": {
+      "command": "npx",
+      "args": ["-y", "@arizeai/phoenix-mcp"]
+    }
+  }
+}

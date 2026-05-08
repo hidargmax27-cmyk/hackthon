@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CircuitSage | Resilient DeFi Agent</title>
+    <meta
+      name="description"
+      content="A chaos-tested DeFi incident agent that survives LLM and MCP dependency failures."
+    >
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="mark" aria-hidden="true">
+            <span></span>
+          </div>
+          <div>
+            <p class="eyebrow">Google Cloud Rapid Agent • DeFi Risk Ops</p>
+            <h1>CircuitSage</h1>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button id="resetBtn" class="icon-button" type="button" title="Reset circuits" aria-label="Reset circuits">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3" />
+              <path d="M4.5 4.5v5h5" />
+            </svg>
+          </button>
+          <button id="runBtn" class="primary-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+            Run Agent
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <aside class="scenario-rail" aria-label="Incident scenarios">
+          <div class="section-label">Incident</div>
+          <div id="scenarioList" class="scenario-list"></div>
+
+          <div class="section-label control-label">Chaos</div>
+          <div class="chaos-stack">
+            <label class="toggle-row">
+              <input type="checkbox" data-chaos="plannerDown">
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>Primary LLM outage</span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" data-chaos="oracleTimeout">
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>Oracle MCP timeout</span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" data-chaos="marketStale">
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>Market MCP stale</span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" data-chaos="vaultSlow">
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>Vault indexer slow</span>
+            </label>
+            <label class="toggle-row">
+              <input type="checkbox" data-chaos="policyCorrupt">
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>Policy source corrupted</span>
+            </label>
+          </div>
+        </aside>
+
+        <section class="main-stage" aria-live="polite">
+          <div class="stage-header">
+            <div>
+              <p id="scenarioAsset" class="eyebrow">USDC / lending vaults</p>
+              <h2 id="scenarioTitle">Stablecoin depeg liquidity run</h2>
+            </div>
+            <div id="modePill" class="mode-pill">Normal</div>
+          </div>
+
+          <div class="decision-strip">
+            <div class="decision-copy">
+              <p class="section-label">Decision</p>
+              <h3 id="decisionAction">Lower borrow caps and route new deposits to guarded vaults</h3>
+              <p id="decisionStatus">Guarded automation allowed</p>
+            </div>
+            <div class="risk-meter" aria-label="Risk score">
+              <svg viewBox="0 0 120 120" role="img" aria-labelledby="riskTitle">
+                <title id="riskTitle">Risk score</title>
+                <circle class="meter-track" cx="60" cy="60" r="48"></circle>
+                <circle id="riskArc" class="meter-arc" cx="60" cy="60" r="48"></circle>
+              </svg>
+              <div>
+                <span id="riskScore">82</span>
+                <small>risk</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="metric-grid" aria-label="Run metrics">
+            <div class="metric">
+              <span id="confidenceMetric">92%</span>
+              <label>Confidence</label>
+            </div>
+            <div class="metric">
+              <span id="exposureMetric">$18.4M</span>
+              <label>Exposure</label>
+            </div>
+            <div class="metric">
+              <span id="failoverMetric">0</span>
+              <label>Failovers</label>
+            </div>
+            <div class="metric">
+              <span id="uptimeMetric">100%</span>
+              <label>Availability</label>
+            </div>
+            <div class="metric">
+              <span id="evalMetric">96</span>
+              <label id="evalGrade">Phoenix eval A</label>
+            </div>
+          </div>
+
+          <div class="evidence-band">
+            <div>
+              <p class="section-label">Evidence</p>
+              <ul id="evidenceList"></ul>
+            </div>
+            <div class="signals">
+              <div>
+                <span id="pegSignal">78 bps</span>
+                <label>Peg drift</label>
+              </div>
+              <div>
+                <span id="oracleSignal">48s</span>
+                <label>Oracle lag</label>
+              </div>
+              <div>
+                <span id="velocitySignal">71%</span>
+                <label>Exit velocity</label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="map-stage" aria-label="Dependency map">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Dependency Health</p>
+              <h2>Failover Map</h2>
+            </div>
+            <span id="latencyBadge">Mean 190ms</span>
+          </div>
+          <canvas id="meshCanvas" width="860" height="520"></canvas>
+          <div id="serviceGrid" class="service-grid"></div>
+        </section>
+
+        <section class="audit-stage" aria-label="Audit trail">
+          <div class="panel-header">
+            <div>
+              <p class="section-label">Audit Trail</p>
+              <h2>Run Ledger</h2>
+            </div>
+            <span id="auditCount">6 events</span>
+          </div>
+          <ol id="auditList" class="audit-list"></ol>
+        </section>
+      </main>
+    </div>
+
+    <script src="src/resilience-engine.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
